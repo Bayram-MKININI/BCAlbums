@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">BCAlbums</string>
+    <string name="error_no_network">Erreur réseau. Vérifier vos paramètres de connexion.</string>
+    <string name="error_contact_support">Une erreur est survenue, veuillez contacter le support technique.</string>
+    <string name="fetch_album_error">Impossible de charger la liste d\'albums</string>
+</resources>
