@@ -1,4 +1,4 @@
-package fr.leboncoin.bcalbums.controllers
+package fr.leboncoin.bcalbums.presenters
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

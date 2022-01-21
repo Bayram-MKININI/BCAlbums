@@ -1,10 +1,6 @@
-package fr.leboncoin.bcalbums.controllers
+package fr.leboncoin.bcalbums.presenters
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import fr.leboncoin.bcalbums.model.Album
 import fr.leboncoin.bcalbums.model.DataRepository
 import kotlinx.coroutines.launch
@@ -13,10 +9,9 @@ import fr.leboncoin.bcalbums.utils.NetworkHelper
 import fr.leboncoin.bcalbums.utils.Resource
 
 class MainFragmentViewModel(
-    application: Application,
     private val dataRepository: DataRepository,
     private val networkHelper: NetworkHelper
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     private val _albums = MutableLiveData<Resource<List<Album>>>()
     val albums: LiveData<Resource<List<Album>>>
@@ -33,7 +28,11 @@ class MainFragmentViewModel(
             if (networkHelper.isNetworkConnected()) {
 
                 dataRepository.fetchAlbums().collect {
-                    _albums.value = it
+
+                    it.data?.let { albums ->
+                        if (albums.isNotEmpty())
+                            _albums.value = it
+                    }
                 }
 
             } else

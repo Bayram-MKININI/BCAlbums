@@ -1,7 +1,6 @@
-package fr.leboncoin.bcalbums.controllers
+package fr.leboncoin.bcalbums.presenters
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +22,7 @@ class MainFragment : Fragment() {
 
     private lateinit var mainView: MainView
     private val mainFragmentViewModel: MainFragmentViewModel by sharedViewModel()
+    private val albumsList = mutableListOf<Album>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
     private val mainViewCallback: MainViewCallback by lazy {
         object : MainViewCallback {
             override fun onItemClickedAtIndex(index: Int) {
-                Toast.makeText(activity, index.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, albumsList[index].title, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -58,8 +58,14 @@ class MainFragment : Fragment() {
 
                         mainView.setProgressVisible(false)
 
-                        resource.data?.let {
-                            refreshAdapters(it)
+                        resource.data?.let { albums ->
+
+                            if (albumsList.isNotEmpty())
+                                albumsList.clear()
+
+                            albumsList.addAll(albums)
+
+                            refreshAdapters()
                         }
                     }
 
@@ -84,7 +90,7 @@ class MainFragment : Fragment() {
             })
     }
 
-    private fun refreshAdapters(albumsList: List<Album>) {
+    private fun refreshAdapters() {
 
         if (albumsList.isEmpty())
             return

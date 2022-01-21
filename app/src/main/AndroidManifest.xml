@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCAlbums">
         <activity
-            android:name=".controllers.MainActivity"
+            android:name=".presenters.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SplashScreenTheme">
             <intent-filter>

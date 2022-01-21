@@ -18,8 +18,10 @@ class DataRepository(
 
         return flow {
 
-            if (fetchAlbumsCached().isNotEmpty())
-                emit(Resource.success(fetchAlbumsCached()))
+            val cachedAlbums = fetchAlbumsCached()
+
+            if (cachedAlbums.isNotEmpty())
+                emit(Resource.success(cachedAlbums))
             else
                 emit(Resource.loading())
 
@@ -52,5 +54,5 @@ class DataRepository(
         }.flowOn(Dispatchers.IO)
     }
 
-    private fun fetchAlbumsCached() = albumDao.getAllAlbums()
+    private suspend fun fetchAlbumsCached() = albumDao.getAllAlbums()
 }

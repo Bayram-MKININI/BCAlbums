@@ -9,7 +9,7 @@ import androidx.room.Query
 interface AlbumsDao {
 
     @Query("SELECT * FROM album")
-    fun getAllAlbums(): List<Album>
+    suspend fun getAllAlbums(): List<Album>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(users: List<Album>): List<Long>

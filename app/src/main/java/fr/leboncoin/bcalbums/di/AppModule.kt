@@ -53,6 +53,6 @@ private fun provideRetrofit(
 
 private fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
-private fun provideDatabase(context: Context): AppDatabase = AppDatabase.create(context)
+private fun provideDatabase(context: Context): AppDatabase = AppDatabase.invoke(context)
 
 fun provideDao(database: AppDatabase): AlbumsDao = database.albumsDao()
