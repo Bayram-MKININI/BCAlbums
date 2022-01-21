@@ -99,7 +99,6 @@ class MainFragment : Fragment() {
 
             AlbumItemViewAdapter().apply {
                 thumbUrl = album.url
-                miniThumbUrl = album.thumbnailUrl
                 title = album.title
             }
         }

@@ -22,7 +22,6 @@ class AlbumItemView(context: Context, attrs: AttributeSet?) : ViewGroup(context,
 
     class AlbumItemViewAdapter {
         var thumbUrl: String = ""
-        var miniThumbUrl: String = ""
         var title: String = ""
     }
 
