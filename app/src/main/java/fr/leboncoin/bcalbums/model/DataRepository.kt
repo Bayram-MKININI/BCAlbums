@@ -1,6 +1,5 @@
 package fr.leboncoin.bcalbums.model
 
-import android.util.Log
 import fr.leboncoin.bcalbums.utils.Error
 import fr.leboncoin.bcalbums.utils.Resource
 import kotlinx.coroutines.Dispatchers

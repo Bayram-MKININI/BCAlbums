@@ -47,7 +47,7 @@ class MarginItemDecoration(
             }
 
             GRID -> if (layoutManager is GridLayoutManager) {
-                outRect.set(spacing, spacing, spacing, spacing);
+                outRect.set(spacing, spacing, spacing, spacing)
             }
         }
     }

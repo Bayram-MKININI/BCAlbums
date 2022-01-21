@@ -45,7 +45,7 @@ class MainView(context: Context, attrs: AttributeSet?) : ViewGroup(context, attr
                 mainViewCallbackWeakReference.get()?.onItemClickedAtIndex(position)
             })
 
-            val spacing = convertDpToPx(5);
+            val spacing = convertDpToPx(5)
 
             it.setPadding(spacing, spacing, spacing, spacing)
             it.clipToPadding = false
@@ -73,7 +73,7 @@ class MainView(context: Context, attrs: AttributeSet?) : ViewGroup(context, attr
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val viewWidth = View.MeasureSpec.getSize(widthMeasureSpec)
+        val viewWidth = MeasureSpec.getSize(widthMeasureSpec)
         val viewHeight = MeasureSpec.getSize(heightMeasureSpec)
 
         recyclerView.measure(

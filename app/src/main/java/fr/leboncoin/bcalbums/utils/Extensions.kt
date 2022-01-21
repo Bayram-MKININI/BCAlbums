@@ -4,7 +4,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 
 fun ViewGroup.inflate(layoutRes: Int, attachToRoot: Boolean): View =
