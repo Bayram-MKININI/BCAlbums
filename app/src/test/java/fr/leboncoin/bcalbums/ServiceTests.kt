@@ -2,7 +2,7 @@ package fr.leboncoin.bcalbums
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import fr.leboncoin.bcalbums.model.ApiService
+import fr.leboncoin.bcalbums.common.data.remote.RemoteApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -36,7 +36,7 @@ class ServiceTests {
             )
         )
         .build()
-        .create(ApiService::class.java)
+        .create(RemoteApi::class.java)
 
     @After
     internal fun tearDown() {
@@ -62,7 +62,7 @@ class ServiceTests {
         mockWebServer.enqueueResponse(200)
 
         runBlocking {
-            val response = apiService.getAlbums()
+            val response = apiService.fetchAlbums()
 
             if (response.isSuccessful && response.body() != null)
                 Assert.assertTrue(response.body()?.size == 5000)
@@ -78,7 +78,7 @@ class ServiceTests {
 
         runBlocking {
 
-            val response = apiService.getAlbums()
+            val response = apiService.fetchAlbums()
 
             if (response.isSuccessful && response.body() != null) {
 

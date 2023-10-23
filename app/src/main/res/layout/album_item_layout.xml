@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fr.leboncoin.bcalbums.views.AlbumItemView
+<fr.leboncoin.bcalbums.feature_albums.presentation.views.AlbumItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mail_layout"
@@ -20,4 +20,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center" />
-</fr.leboncoin.bcalbums.views.AlbumItemView>
+</fr.leboncoin.bcalbums.feature_albums.presentation.views.AlbumItemView>
