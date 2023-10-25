@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,12 +19,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 import fr.leboncoin.bcalbums.common.util.UIEvent.ShowError
-import fr.leboncoin.bcalbums.common.util.collectAsEffect
 import fr.leboncoin.bcalbums.feature_albums.domain.model.Album
 import fr.leboncoin.bcalbums.feature_albums.presentation.screens.AlbumsScreen
 import fr.leboncoin.bcalbums.feature_albums.presentation.screens.AlertToast
@@ -49,13 +51,16 @@ class MainActivity : ComponentActivity() {
         viewModel: MainFragmentViewModel
     ) {
         val context = LocalContext.current
-        viewModel.eventFlow.collectAsEffect(block = { uiEvent ->
-            when (uiEvent) {
-                is ShowError -> {
-                    Toast.makeText(context, uiEvent.errorStrRes, Toast.LENGTH_LONG).show()
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        LaunchedEffect(key1 = Unit) {
+            viewModel.eventFlow.flowWithLifecycle(lifecycle).collect { uiEvent ->
+                when (uiEvent) {
+                    is ShowError -> {
+                        Toast.makeText(context, uiEvent.errorStrRes, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-        })
+        }
     }
 
     @Composable
