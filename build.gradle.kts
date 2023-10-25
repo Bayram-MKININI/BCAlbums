@@ -1,3 +1,5 @@
+val composeVersion by extra { "1.5.4" }
+val composeCompilerVersion by extra { "1.5.3" }
 plugins {
     id("com.android.application") version "8.1.2" apply false
     id("com.android.library") version "8.1.2" apply false

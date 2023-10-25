@@ -24,12 +24,17 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     kotlinOptions {
@@ -75,15 +80,22 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1")
     ksp("com.google.dagger:hilt-compiler:2.48.1")
 
-    // UI
-    implementation("com.google.android.material:material:1.10.0")
-    implementation("androidx.activity:activity-ktx:1.8.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.browser:browser:1.6.0")
-    implementation("io.coil-kt:coil:2.4.0")
+    // Compose
+    val composeVersion: String by rootProject.extra
+    val composeCompilerVersion: String by rootProject.extra
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    implementation("androidx.compose.foundation:foundation:$composeVersion")
+    implementation("androidx.compose.foundation:foundation-layout:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation("androidx.compose.runtime:runtime:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    implementation("androidx.compose.animation:animation:$composeVersion")
+    implementation("androidx.compose.compiler:compiler:$composeCompilerVersion")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
