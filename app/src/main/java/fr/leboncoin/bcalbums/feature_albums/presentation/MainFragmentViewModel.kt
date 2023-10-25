@@ -47,7 +47,12 @@ class MainFragmentViewModel @Inject constructor(
         viewModelScope.launch {
             getAlbumsUseCase().onEach { result ->
                 when (result) {
-                    is Loading -> _stateFlow.value = LoadingState()
+                    is Loading -> _stateFlow.value = if (result.data?.isNotEmpty() == true) {
+                        DataState(result.data)
+                    } else {
+                        LoadingState()
+                    }
+
                     is Success -> _stateFlow.value = DataState(result.data)
                     is Error -> {
                         when (result.dataError) {
