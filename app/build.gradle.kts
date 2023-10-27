@@ -58,6 +58,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Support Libraries
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     // Network
@@ -96,10 +97,6 @@ dependencies {
     implementation("androidx.compose.animation:animation:$composeVersion")
     implementation("androidx.compose.compiler:compiler:$composeCompilerVersion")
     implementation("io.coil-kt:coil-compose:2.4.0")
-
-    // Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
 
     // Tests
     testImplementation("junit:junit:")

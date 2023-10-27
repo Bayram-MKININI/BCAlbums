@@ -15,38 +15,31 @@ import javax.inject.Inject
 
 class AlbumsRepositoryImp @Inject constructor(
     private val api: RemoteApi,
-    private val albumDao: AlbumsDao
+    private val dao: AlbumsDao
 ) : AlbumsRepository {
 
     override fun fetchAlbums(): Flow<Resource<List<Album>>> = flow {
 
         emit(Loading())
-        val cachedAlbums = fetchAlbumsCached()
+        val cachedAlbums = dao.getCachedAlbums()
         emit(Loading(data = cachedAlbums.map { it.toAlbum() }))
 
         try {
-            val response = api.fetchAlbums()
-            if (response.isSuccessful && response.body() != null) {
-                response.body()?.let { albumsList ->
-                    albumDao.insertAlbums(
-                        albumsList.map { it.toAlbumEntity() }
-                    ).filter {
-                        it > 0
-                    }.also { inserts ->
-                        if (inserts.isNotEmpty()) {
-                            emit(
-                                Success(albumDao.getCachedAlbums().map { it.toAlbum() })
-                            )
-                        }
-                    }
+            val albumsList = api.fetchAlbums()
+            dao.insertAlbums(
+                albumsList.map { it.toAlbumEntity() }
+            ).filter {
+                it > 0
+            }.also { inserts ->
+                if (inserts.isNotEmpty()) {
+                    emit(
+                        Success(dao.getCachedAlbums().map { it.toAlbum() })
+                    )
                 }
             }
-
         } catch (ex: Exception) {
             ex.printStackTrace()
             emit(Error(dataError = ErrorType.NETWORK_ERROR))
         }
     }
-
-    private suspend fun fetchAlbumsCached() = albumDao.getCachedAlbums()
 }
