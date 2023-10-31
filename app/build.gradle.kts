@@ -96,7 +96,7 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     implementation("androidx.compose.animation:animation:$composeVersion")
     implementation("androidx.compose.compiler:compiler:$composeCompilerVersion")
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     // Tests
     testImplementation("junit:junit:")
